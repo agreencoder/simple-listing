@@ -66,9 +66,11 @@ class ListingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Listing $listing)
     {
-        //
+        return inertia('Listing/Edit',[
+            'listing' => $listing
+        ]);
     }
 
     /**
@@ -78,9 +80,17 @@ class ListingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Listing $listing)
     {
-        //
+        $listing->update(
+            $request->validate([
+                'name' => 'required',
+                'age' => 'required',
+                'address' => 'required',
+            ])
+        );
+
+        return redirect()->route('listing.index')->with('success', 'Update Was Successful!');
     }
 
     /**
@@ -89,8 +99,9 @@ class ListingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Listing $listing)
     {
-        //
+        $listing->delete();
+        return redirect()->back()->with('success', 'Data Deleted!');
     }
 }

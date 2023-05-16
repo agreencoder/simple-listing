@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('listing', ListingController::class)->only('index', 'show', 'create', 'store');
+Route::resource('listing', ListingController::class);

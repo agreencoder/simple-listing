@@ -4,7 +4,12 @@
             <Link :href="route('listing.show', {listing: listing.id})">
                 <ListingDetail :listing="listing" />
             </Link>
+            <div>
+                <Link :href="route('listing.edit', {listing: listing.id})">Edit</Link>
+                <Link :href="route('listing.destroy', {listing: listing.id})" method="DELETE">Delete</Link>
+            </div>
         </div>
+        
     </div>
 </template>
 
